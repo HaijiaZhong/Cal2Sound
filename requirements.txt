@@ -1,0 +1,8 @@
+# Minimal dependencies.
+# Additional dependencies will be added after the original codebase is migrated.
+numpy
+scipy
+matplotlib
+torch
+pyyaml
+jupyter

@@ -1,0 +1,31 @@
+# Python and environments
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.env
+.env.*
+.ipynb_checkpoints/
+.pytest_cache/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+
+# Experiment artifacts
+wandb/
+logs/
+outputs/
+data/raw/
+data/processed/
+checkpoints/**/*.pth
+checkpoints/**/*.pt
+checkpoints/**/*.ckpt
+checkpoints/**/*.safetensors
+*.npy
+*.npz
+*.mat
+
+# Demo audio and paper figures are intentionally not ignored.
