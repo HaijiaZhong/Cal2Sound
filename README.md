@@ -1,4 +1,5 @@
 # Cal2Sound
+<<<<<<< HEAD
 
 Calcium-aware Neural-to-Sound Reconstruction from Wide-field Auditory Cortical Imaging
 
@@ -97,3 +98,5 @@ Provisional citation placeholder only; publication and acceptance are not confir
 Repository code is provided under the [MIT License](LICENSE). The copyright holder is TBD and must be confirmed before publication.
 
 The license for the neural dataset and pretrained external models may be governed by their respective original licenses. This repository does not claim ownership of third-party models or datasets.
+=======
+>>>>>>> a656e589f2872a30d378c81f02d74c9360adfaf5
