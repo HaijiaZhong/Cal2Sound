@@ -1,0 +1,131 @@
+{
+  "seed": 3407,
+  "whether_seed": true,
+  "data": {
+    "marmoset": "ZJM",
+    "data_path": "/data/zhj/neu2sou/ZJM_dataset/pixel_level/",
+    "neu_dataset": "700trials_fluore_dataset_pixel.npy",
+    "latent_dataset": "latents_700sounds_4500ms.npy",
+    "mel_dataset": "m2l_mel128_magnitude_spectrogram_700sounds_4500ms.npy",
+    "data_splite_types": "sametypes_out",
+    "options4data_splite": {
+      "sametypes_out": "same types in speech&melody out",
+      "leaveone_out": "only one trial out"
+    }
+  },
+  "save_load": {
+    "save_folder": "/home/zhj/projs/Neu2Sound/adaptation/results_20260901_ZJM_TCN_dynamics_v2_10folds",
+    "checkpoint": true,
+    "model_path": "alignment_model.pth"
+  },
+  "data_loader": {
+    "batch_size": 288,
+    "shuffle": true,
+    "S_idx": 1,
+    "M_idx": 1
+  },
+  "runtime": {
+    "cpu_threads": 1,
+    "cpu_interop_threads": 1
+  },
+  "model": {
+    "model_name": "tcn_dynamics_v2",
+    "spatial_dim": 1024,
+    "neu_F_dim": 4667,
+    "latent_T_dim": 52,
+    "latent_F_dim": 64,
+    "sigma_rescale": 0.06,
+    "options_neu_F_dim": {
+      "ZJM": 4667,
+      "M102D": 4124,
+      "M160E": 4223
+    },
+    "model_configs": {
+      "tcn_dynamics_v2": {
+        "display_name": "TCN + Calcium-Informed BiGRU (V2)",
+        "experiment_group": "calcium_dynamics",
+        "variant": "calcium_innovation_bidirectional_gru_refined_tcn",
+        "kwargs": {
+          "channels": 256,
+          "dilations": [
+            1,
+            2,
+            4,
+            8,
+            16
+          ],
+          "dropout": 0.1,
+          "norm_groups": 8,
+          "use_recurrent_refinement": true,
+          "use_calcium_innovation": true,
+          "gru_layers": 1,
+          "bidirectional": true,
+          "decay_init": 0.95,
+          "gamma_min": 0.5,
+          "gamma_max": 0.999,
+          "innovation_scale_init": 0.1,
+          "recurrent_residual_scale_init": 0.1
+        }
+      }
+    }
+  },
+  "train": {
+    "epochs": 3000,
+    "early_stop": true,
+    "es_num": 100,
+    "final_save": false,
+    "save_epochs": 400
+  },
+  "loss": {
+    "type": "complex",
+    "complex": {
+      "huber_delta": 1.0,
+      "lambda_huber": 1.0,
+      "lambda_time": 0.2,
+      "lambda_std": 0.2
+    },
+    "spectral": {
+      "enabled": false,
+      "lambda": 1.0,
+      "batch_size": 4,
+      "smooth_l1_beta": 0.1,
+      "sample_rate": 48000,
+      "n_fft": 2048,
+      "n_mels": 128,
+      "f_min": 0.0,
+      "f_max": 24000.0,
+      "latent_scale": 0.06,
+      "denoising_steps": 1,
+      "noise_seed": 3407,
+      "subset_seed": 3408,
+      "use_amp": true,
+      "amp_dtype": "bfloat16",
+      "checkpoint_path": null
+    }
+  },
+  "optimizer": {
+    "type": "radam",
+    "radam": {
+      "lr": 0.0001,
+      "weight_decay": 0.0001
+    }
+  },
+  "scheduler": {
+    "type": "cos",
+    "cos": {
+      "T_max_of_epoch": 1,
+      "eta_min": 1e-06
+    }
+  },
+  "logging": {
+    "print_freq": 50,
+    "tensorboard_subdir": "cp"
+  },
+  "benchmark": {
+    "diagonal_only": false,
+    "s_start": 1,
+    "s_end": 10,
+    "m_start": 1,
+    "m_end": 10
+  }
+}

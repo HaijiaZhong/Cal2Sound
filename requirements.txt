@@ -1,8 +1,35 @@
-# Minimal dependencies.
-# Additional dependencies will be added after the original codebase is migrated.
-numpy
-scipy
-matplotlib
-torch
-pyyaml
-jupyter
+# Relevant packages from Conda environment: marmoset, Python 3.11.11.
+# Direct/runtime dependencies only; pip resolves their transitive dependencies.
+# Fresh installation has not been validated. No model assets are bundled.
+
+# Numerical analysis and audio I/O
+numpy==1.26.4
+scipy==1.17.1
+pandas==2.2.3
+matplotlib==3.10.0
+soundfile==0.12.1
+librosa==0.11.0
+
+# Neural adaptor training and Music2Latent decoding
+# Source environment: torch/torchaudio 2.9.1+cu128.
+torch==2.9.1
+torchaudio==2.9.1
+tqdm==4.67.1
+tensorboard==2.19.0
+adamp==0.3.0
+music2latent==0.1.6
+
+# F0 estimators (pYIN is provided by librosa)
+torchcrepe==0.0.23
+pesto-pitch==2.0.1
+rmvpe-onnx==0.2.3
+swift-f0==0.1.2
+libf0==1.0.2
+# CPU default. marmoset instead has onnxruntime-gpu==1.26.0.
+# Do not install both ONNX Runtime distributions in the same environment.
+onnxruntime==1.26.0
+
+# Interactive evaluation and audio playback
+jupyterlab==4.3.5
+ipython==8.29.0
+ipykernel==6.29.5
